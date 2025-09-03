@@ -68,10 +68,5 @@
         }
       ]
     }
-  ],
-  "functions": {
-    "index.html": {
-      "includeFiles": "**"
-    }
-  }
+  ]
 }
