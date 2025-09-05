@@ -142,7 +142,7 @@
             align-items: center;
             gap: 8px;
         }
-        .input-group input, .input-group select {
+        .input-group input, .input-group select, .input-group textarea {
             padding: 14px 16px;
             border: 2px solid var(--border-color);
             border-radius: 10px;
@@ -150,8 +150,14 @@
             transition: all 0.3s ease;
             width: 100%;
             background: white;
+            font-family: inherit;
         }
-        .input-group input:focus, .input-group select:focus {
+        .input-group textarea {
+            resize: vertical;
+            min-height: 80px;
+            max-height: 150px;
+        }
+        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
@@ -302,7 +308,7 @@
             width: 100%;
             border-collapse: collapse;
             margin: 0;
-            min-width: 900px;
+            min-width: 1200px;
             background: white;
         }
         .attendance-table th,
@@ -311,6 +317,7 @@
             text-align: left;
             border-bottom: 1px solid var(--border-color);
             font-size: clamp(13px, 2vw, 14px);
+            vertical-align: top;
         }
         .attendance-table th {
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
@@ -329,6 +336,62 @@
             background: linear-gradient(135deg, #fff3cd, #ffeaa7) !important;
             border-left: 4px solid var(--warning-color);
         }
+        .description-cell {
+            max-width: 200px;
+            word-wrap: break-word;
+            font-size: 12px;
+            line-height: 1.3;
+            position: relative;
+        }
+        
+        /* Enhanced description display styles */
+        .description-preview {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            background: rgba(102, 126, 234, 0.05);
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(102, 126, 234, 0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .description-preview:hover {
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.3);
+        }
+        
+        .description-preview.clickable::after {
+            content: ' 👁️ Click to view full';
+            font-size: 10px;
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .description-full {
+            max-height: none;
+            white-space: pre-wrap;
+            word-break: break-word;
+            background: rgba(76, 175, 80, 0.05);
+            border: 1px solid rgba(76, 175, 80, 0.3);
+            padding: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+            line-height: 1.4;
+        }
+        
+        .description-full::after {
+            content: ' 👁️ Click to collapse';
+            font-size: 10px;
+            color: var(--success-color);
+            font-weight: bold;
+            display: block;
+            margin-top: 4px;
+        }
+        
         .status-message {
             text-align: center;
             padding: 15px;
@@ -354,7 +417,7 @@
             font-size: clamp(16px, 3vw, 18px);
         }
         
-        /* FIXED MODAL STYLES */
+        /* Modal Styles */
         .modal {
             position: fixed;
             top: 0;
@@ -385,7 +448,7 @@
         .modal-content {
             background: white;
             border-radius: 20px;
-            max-width: 650px;
+            max-width: 750px;
             width: 100%;
             max-height: 95vh;
             overflow: hidden;
@@ -463,7 +526,7 @@
             gap: 8px;
         }
         
-        .edit-form input, .edit-form select {
+        .edit-form input, .edit-form select, .edit-form textarea {
             padding: 14px 16px;
             border: 2px solid var(--border-color);
             border-radius: 10px;
@@ -471,9 +534,16 @@
             transition: all 0.3s ease;
             width: 100%;
             background: white;
+            font-family: inherit;
         }
         
-        .edit-form input:focus, .edit-form select:focus {
+        .edit-form textarea {
+            resize: vertical;
+            min-height: 80px;
+            max-height: 120px;
+        }
+        
+        .edit-form input:focus, .edit-form select:focus, .edit-form textarea:focus {
             outline: none;
             border-color: var(--primary-color);
             box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
@@ -511,7 +581,7 @@
             .btn { width: 100%; max-width: 300px; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 15px; }
             .download-buttons { flex-direction: column; align-items: center; }
-            .attendance-table { min-width: 800px; }
+            .attendance-table { min-width: 1000px; }
             
             .modal {
                 padding: 10px;
@@ -535,7 +605,7 @@
         @media (max-width: 480px) {
             .stats-grid { grid-template-columns: 1fr; }
             .attendance-table th, .attendance-table td { padding: 10px 8px; font-size: 12px; }
-            .attendance-table { min-width: 700px; }
+            .attendance-table { min-width: 900px; }
             .current-time { font-size: clamp(1.5rem, 6vw, 2.2rem); }
             
             .modal-header {
@@ -567,7 +637,6 @@
             background: var(--secondary-color);
         }
         
-        /* Modal scrollbar */
         .modal-body::-webkit-scrollbar {
             width: 6px;
         }
@@ -585,7 +654,7 @@
     <div class="container">
         <!-- Header Section -->
         <div class="card header">
-            <h1>🏢 Unlimited Attendance System</h1>
+            <h1>🢠 Unlimited Attendance System</h1>
             <p>Online/Offline | Unlimited Entries | Complete Freedom</p>
             <div class="current-time" id="currentTime">00:00:00</div>
             <div class="current-date" id="currentDate"></div>
@@ -612,7 +681,7 @@
         
         <!-- Location Information -->
         <div class="card">
-            <h2>📍 Location Information</h2>
+            <h2>📍 Location & Notes</h2>
             <div class="form-group">
                 <div class="input-group">
                     <label for="checkInLocation">📍 Current Location:</label>
@@ -625,13 +694,17 @@
                         <option value="Co-working Space">
                     </datalist>
                 </div>
+                <div class="input-group">
+                    <label for="workDescription">📝 Work Description/Notes:</label>
+                    <textarea id="workDescription" placeholder="Describe your work activities, meetings, projects, etc. (optional)"></textarea>
+                </div>
             </div>
         </div>
         
         <!-- Action Buttons -->
         <div class="card">
             <h2>⚡ Quick Actions</h2>
-            <p>Multiple check-ins/check-outs allowed. Mark holidays anytime. No restrictions!</p>
+            <p>Multiple check-ins/check-outs allowed. Mark holidays anytime. Add descriptions to track your activities!</p>
             <div class="button-group">
                 <button class="btn btn-checkin" onclick="checkIn()">
                     📥 Check In Now
@@ -671,7 +744,7 @@
             <div class="download-section">
                 <div class="download-header">
                     <h3>📊 Download Reports</h3>
-                    <p>Export your attendance data with complete details</p>
+                    <p>Export your attendance data with complete details including descriptions</p>
                 </div>
                 <div class="download-buttons">
                     <button class="btn-download" onclick="downloadCSVReport()">
@@ -690,7 +763,7 @@
         <!-- Attendance Records Table -->
         <div class="card">
             <h3>📋 Complete Attendance Records</h3>
-            <p>All entries with full edit capability - no restrictions!</p>
+            <p>All entries with full edit capability and activity descriptions - no restrictions! Click on descriptions to view full text.</p>
             <div class="table-container">
                 <table class="attendance-table">
                     <thead>
@@ -701,6 +774,7 @@
                             <th>📤 Check Out</th>
                             <th>📍 Out Location</th>
                             <th>⏱️ Duration</th>
+                            <th>📝 Description/Notes</th>
                             <th>🎉 Holiday/Event</th>
                             <th>👤 Employee</th>
                             <th>⚡ Actions</th>
@@ -716,7 +790,7 @@
         </div>
     </div>
     
-    <!-- FIXED Edit Modal -->
+    <!-- Edit Modal -->
     <div id="editModal" class="modal" style="display: none;">
         <div class="modal-content">
             <div class="modal-header">
@@ -748,6 +822,11 @@
                     <div>
                         <label>📍 Check Out Location:</label>
                         <input type="text" id="editCheckOutLocation" placeholder="Enter check-out location">
+                    </div>
+                    
+                    <div>
+                        <label>📝 Work Description/Notes:</label>
+                        <textarea id="editWorkDescription" placeholder="Describe work activities, meetings, projects, etc."></textarea>
                     </div>
                     
                     <div>
@@ -798,7 +877,7 @@
             }
         }
         
-        // FIXED Modal Functions
+        // Modal Functions
         function closeEdit() {
             const modal = document.getElementById('editModal');
             modal.style.display = 'none';
@@ -823,6 +902,26 @@
                 }
             }
         });
+        
+        // Enhanced description toggle function
+        function toggleDescription(element, recordId) {
+            const record = attendanceData.find(r => r.id === recordId);
+            if (!record || !record.workDescription) return;
+            
+            const isExpanded = element.classList.contains('description-full');
+            
+            if (isExpanded) {
+                // Collapse - show preview
+                element.className = 'description-preview clickable';
+                element.textContent = record.workDescription.length > 100 ? 
+                    record.workDescription.substring(0, 97) + '...' : 
+                    record.workDescription;
+            } else {
+                // Expand - show full text
+                element.className = 'description-full';
+                element.textContent = record.workDescription;
+            }
+        }
         
         // Time and Date Functions
         function updateCurrentTime() {
@@ -872,6 +971,7 @@
                 localStorage.setItem('attendanceData', JSON.stringify(attendanceData));
                 localStorage.setItem('employeeName', document.getElementById('employeeName').value);
                 localStorage.setItem('employeeId', document.getElementById('employeeId').value);
+                localStorage.setItem('workDescription', document.getElementById('workDescription').value);
             } catch (e) {
                 console.error('Error saving data:', e);
             }
@@ -882,6 +982,7 @@
                 const savedAttendance = localStorage.getItem('attendanceData');
                 const savedName = localStorage.getItem('employeeName');
                 const savedId = localStorage.getItem('employeeId');
+                const savedDescription = localStorage.getItem('workDescription');
                 
                 if (savedAttendance) {
                     attendanceData = JSON.parse(savedAttendance);
@@ -891,6 +992,9 @@
                 }
                 if (savedId) {
                     document.getElementById('employeeId').value = savedId;
+                }
+                if (savedDescription) {
+                    document.getElementById('workDescription').value = savedDescription;
                 }
             } catch (e) {
                 console.error('Error loading data:', e);
@@ -903,8 +1007,8 @@
             const name = document.getElementById('employeeName').value.trim();
             const empId = document.getElementById('employeeId').value.trim();
             const location = document.getElementById('checkInLocation').value.trim();
+            const description = document.getElementById('workDescription').value.trim();
             
-            // Allow check-in even without all fields filled
             const now = new Date();
             const today = now.toISOString().split('T')[0];
             const time = now.toLocaleTimeString('en-US', { 
@@ -921,6 +1025,7 @@
                 checkOutTime: '',
                 checkOutLocation: '',
                 totalHours: '',
+                workDescription: description || '',
                 holidayEvent: '',
                 employeeName: name || 'Not specified',
                 employeeId: empId || 'Not specified',
@@ -935,6 +1040,7 @@
         
         function checkOut() {
             const location = document.getElementById('checkInLocation').value.trim();
+            const description = document.getElementById('workDescription').value.trim();
             const name = document.getElementById('employeeName').value.trim();
             const empId = document.getElementById('employeeId').value.trim();
             
@@ -958,6 +1064,15 @@
                 openCheckIn.checkOutTime = time;
                 openCheckIn.checkOutLocation = location || 'Not specified';
                 
+                // Update or append to work description
+                if (description) {
+                    if (openCheckIn.workDescription && openCheckIn.workDescription !== description) {
+                        openCheckIn.workDescription += ` | ${description}`;
+                    } else if (!openCheckIn.workDescription) {
+                        openCheckIn.workDescription = description;
+                    }
+                }
+                
                 // Calculate total hours
                 if (openCheckIn.checkInTime && openCheckIn.checkOutTime) {
                     const checkInTime = new Date(`${today} ${openCheckIn.checkInTime}`);
@@ -978,6 +1093,7 @@
                     checkOutTime: time,
                     checkOutLocation: location || 'Not specified',
                     totalHours: '',
+                    workDescription: description || '',
                     holidayEvent: '',
                     employeeName: name || 'Not specified',
                     employeeId: empId || 'Not specified',
@@ -995,6 +1111,7 @@
         function markHoliday() {
             const name = document.getElementById('employeeName').value.trim();
             const empId = document.getElementById('employeeId').value.trim();
+            const description = document.getElementById('workDescription').value.trim();
             const holidayName = prompt("Enter holiday/event name (optional):");
             
             if (holidayName === null) return; // User cancelled
@@ -1010,6 +1127,7 @@
                 checkOutTime: 'Holiday',
                 checkOutLocation: 'Holiday',
                 totalHours: 'Holiday',
+                workDescription: description || '',
                 holidayEvent: holidayName || 'Holiday',
                 employeeName: name || 'Not specified',
                 employeeId: empId || 'Not specified',
@@ -1035,6 +1153,7 @@
             document.getElementById('editCheckInLocation').value = record.checkInLocation === 'Holiday' ? '' : record.checkInLocation;
             document.getElementById('editCheckOutTime').value = record.checkOutTime === 'Holiday' ? '' : record.checkOutTime;
             document.getElementById('editCheckOutLocation').value = record.checkOutLocation === 'Holiday' ? '' : record.checkOutLocation;
+            document.getElementById('editWorkDescription').value = record.workDescription || '';
             document.getElementById('editHoliday').value = record.holidayEvent || '';
             document.getElementById('editEmployeeName').value = record.employeeName || '';
             document.getElementById('editEmployeeId').value = record.employeeId || '';
@@ -1054,6 +1173,7 @@
             record.checkInLocation = document.getElementById('editCheckInLocation').value || 'Holiday';
             record.checkOutTime = document.getElementById('editCheckOutTime').value || 'Holiday';
             record.checkOutLocation = document.getElementById('editCheckOutLocation').value || 'Holiday';
+            record.workDescription = document.getElementById('editWorkDescription').value || '';
             record.holidayEvent = document.getElementById('editHoliday').value || '';
             record.employeeName = document.getElementById('editEmployeeName').value || 'Not specified';
             record.employeeId = document.getElementById('editEmployeeId').value || 'Not specified';
@@ -1117,6 +1237,21 @@
             tbody.innerHTML = attendanceData.map(record => {
                 const rowClass = record.type === 'holiday' || record.holidayEvent ? 'holiday-row' : '';
                 
+                // Enhanced description display with click functionality
+                let descriptionHtml = '-';
+                if (record.workDescription && record.workDescription.trim()) {
+                    const isLong = record.workDescription.length > 100;
+                    const previewText = isLong ? record.workDescription.substring(0, 97) + '...' : record.workDescription;
+                    
+                    descriptionHtml = `
+                        <div class="description-preview ${isLong ? 'clickable' : ''}" 
+                             onclick="toggleDescription(this, '${record.id}')" 
+                             title="${record.workDescription}">
+                            ${previewText}
+                        </div>
+                    `;
+                }
+                
                 return `
                     <tr class="${rowClass}">
                         <td>${formatDate(record.date)}</td>
@@ -1125,6 +1260,9 @@
                         <td>${record.checkOutTime || '-'}</td>
                         <td>${record.checkOutLocation || '-'}</td>
                         <td>${record.totalHours ? (record.totalHours === 'Holiday' ? 'Holiday' : record.totalHours + 'h') : '-'}</td>
+                        <td class="description-cell">
+                            ${descriptionHtml}
+                        </td>
                         <td>${record.holidayEvent || '-'}</td>
                         <td>${record.employeeName || '-'}<br><small>${record.employeeId || '-'}</small></td>
                         <td>
@@ -1178,25 +1316,26 @@
             }, 5000);
         }
         
-        // Export Functions
+        // Enhanced Export Functions with full descriptions
         function downloadCSVReport() {
             if (attendanceData.length === 0) {
                 showMessage('No data to export', 'error');
                 return;
             }
             
-            let csvContent = 'Date,Check In Time,Check In Location,Check Out Time,Check Out Location,Total Hours,Holiday/Event,Employee Name,Employee ID,Type\n';
+            let csvContent = 'Date,Check In Time,Check In Location,Check Out Time,Check Out Location,Total Hours,Work Description/Notes,Holiday/Event,Employee Name,Employee ID,Type\n';
             
             attendanceData.forEach(record => {
                 csvContent += [
                     record.date,
                     record.checkInTime || '',
-                    `"${record.checkInLocation || ''}"`,
+                    `"${(record.checkInLocation || '').replace(/"/g, '""')}"`,
                     record.checkOutTime || '',
-                    `"${record.checkOutLocation || ''}"`,
+                    `"${(record.checkOutLocation || '').replace(/"/g, '""')}"`,
                     record.totalHours || '',
-                    `"${record.holidayEvent || ''}"`,
-                    `"${record.employeeName || ''}"`,
+                    `"${(record.workDescription || '').replace(/"/g, '""')}"`,
+                    `"${(record.holidayEvent || '').replace(/"/g, '""')}"`,
+                    `"${(record.employeeName || '').replace(/"/g, '""')}"`,
                     record.employeeId || '',
                     record.type || 'attendance'
                 ].join(',') + '\n';
@@ -1222,11 +1361,11 @@
             }
             
             const { jsPDF } = window.jspdf;
-            const doc = new jsPDF();
+            const doc = new jsPDF('landscape');
             
             // Title
             doc.setFontSize(20);
-            doc.text('Attendance Report', 20, 20);
+            doc.text('Attendance Report with Complete Work Descriptions', 20, 20);
             
             // Date
             doc.setFontSize(12);
@@ -1245,33 +1384,78 @@
             doc.text(`Total Hours: ${Math.round(totalHours)}h`, 20, 60);
             doc.text(`Total Entries: ${attendanceData.length}`, 20, 70);
             
-            // Create table data
-            let tableData = attendanceData.map(record => [
-                formatDate(record.date),
-                record.checkInTime || '-',
-                record.checkInLocation || '-',
-                record.checkOutTime || '-',
-                record.checkOutLocation || '-',
-                record.totalHours ? (record.totalHours === 'Holiday' ? 'Holiday' : record.totalHours + 'h') : '-',
-                record.holidayEvent || '-',
-                record.employeeName || '-'
-            ]);
+            // Enhanced table data with full descriptions (up to 10 lines)
+            let tableData = attendanceData.map(record => {
+                // Enhanced description handling - show up to 10 lines or 500 characters
+                let description = '-';
+                if (record.workDescription && record.workDescription.trim()) {
+                    const lines = record.workDescription.split('\n');
+                    if (lines.length > 10) {
+                        description = lines.slice(0, 10).join('\n') + '\n... (truncated)';
+                    } else if (record.workDescription.length > 500) {
+                        description = record.workDescription.substring(0, 497) + '...';
+                    } else {
+                        description = record.workDescription;
+                    }
+                }
+                        
+                return [
+                    formatDate(record.date),
+                    record.checkInTime || '-',
+                    (record.checkInLocation || '-').substring(0, 15),
+                    record.checkOutTime || '-',
+                    (record.checkOutLocation || '-').substring(0, 15),
+                    record.totalHours ? (record.totalHours === 'Holiday' ? 'Holiday' : record.totalHours + 'h') : '-',
+                    description, // Full description with line breaks
+                    (record.holidayEvent || '-').substring(0, 15),
+                    (record.employeeName || '-').substring(0, 15)
+                ];
+            });
             
             doc.autoTable({
                 startY: 85,
-                head: [['Date', 'Check In', 'In Location', 'Check Out', 'Out Location', 'Hours', 'Holiday/Event', 'Employee']],
+                head: [['Date', 'Check In', 'In Loc', 'Check Out', 'Out Loc', 'Hours', 'Work Description (Full)', 'Holiday', 'Employee']],
                 body: tableData,
-                styles: { fontSize: 8 },
-                headStyles: { fillColor: [102, 126, 234] }
+                styles: { 
+                    fontSize: 8,
+                    cellPadding: 3,
+                    overflow: 'linebreak',
+                    lineColor: [200, 200, 200],
+                    lineWidth: 0.1
+                },
+                headStyles: { 
+                    fillColor: [102, 126, 234],
+                    textColor: 255,
+                    fontStyle: 'bold'
+                },
+                columnStyles: {
+                    6: { 
+                        cellWidth: 70, // Give more width to description column
+                        overflow: 'linebreak',
+                        valign: 'top'
+                    },
+                    0: { cellWidth: 25 }, // Date column
+                    1: { cellWidth: 20 }, // Check in
+                    2: { cellWidth: 25 }, // In location
+                    3: { cellWidth: 20 }, // Check out
+                    4: { cellWidth: 25 }, // Out location
+                    5: { cellWidth: 20 }, // Hours
+                    7: { cellWidth: 25 }, // Holiday
+                    8: { cellWidth: 25 }  // Employee
+                },
+                margin: { top: 20, right: 20, bottom: 20, left: 20 },
+                pageBreak: 'auto',
+                rowPageBreak: 'avoid'
             });
             
-            doc.save(`attendance-report-${new Date().toISOString().split('T')[0]}.pdf`);
-            showMessage('📄 PDF report downloaded successfully!', 'success');
+            doc.save(`attendance-report-full-descriptions-${new Date().toISOString().split('T')[0]}.pdf`);
+            showMessage('📄 PDF report with full descriptions downloaded successfully!', 'success');
         }
         
-        // Auto-save employee info
+        // Auto-save employee info and description
         document.getElementById('employeeName').addEventListener('input', saveData);
         document.getElementById('employeeId').addEventListener('input', saveData);
+        document.getElementById('workDescription').addEventListener('input', saveData);
     </script>
 </body>
 </html>
